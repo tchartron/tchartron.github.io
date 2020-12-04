@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Z Themes Documentation</title>
-    <link>http://example.org/en/</link>
+    <link>tchartron.github.io/en/</link>
     <description>Recent content on Z Themes Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©{year}, All Rights Reserved</copyright>
     
-        <atom:link href="http://example.org/en/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="tchartron.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     
     
     
