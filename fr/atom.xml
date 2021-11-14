@@ -60,9 +60,9 @@
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rm -rf&lt;&#x2F;span&gt;&lt;span&gt; public_zola
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-e &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;\033[0;32mCommit change to main repository\033[0m\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# git add .
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# git commit -am &amp;quot;update&amp;quot;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# git push origin main
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; add .
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; commit&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -am &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;update&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; push origin main
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Go To Public folder
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span&gt; public
