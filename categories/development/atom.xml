@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
 	<title>tchartron - development</title>
-	<subtitle>A blog about web development, devops</subtitle>
+	<subtitle>Un blog sur le développement web, le devops</subtitle>
 	<link href="https://tchartron.com/categories/development/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://tchartron.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2021-11-11T00:00:00+00:00</updated>
 	<id>https://tchartron.com/categories/development/atom.xml</id>
-	<entry xml:lang="en">
+	<entry xml:lang="fr">
 		<title>Zola on github Pages</title>
 		<published>2021-11-11T00:00:00+00:00</published>
 		<updated>2021-11-11T00:00:00+00:00</updated>
-		<link href="https://tchartron.com/zola/deploy-github/" type="text/html"/>
-		<id>https://tchartron.com/zola/deploy-github/</id>
-		<content type="html">&lt;h1 id=&quot;deploy-a-zola-site-to-github-pages&quot;&gt;Deploy a zola site to GitHub pages&lt;&#x2F;h1&gt;
+		<link href="https://tchartron.com/fr/zola/deploy-github/" type="text/html"/>
+		<id>https://tchartron.com/fr/zola/deploy-github/</id>
+		<content type="html">&lt;p&gt;FRENCH&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;deploy-a-zola-site-to-github-pages&quot;&gt;Deploy a zola site to GitHub pages&lt;&#x2F;h1&gt;
 &lt;p&gt;This will explain how to deploy a website created with &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt; SSG to github pages and host it for free.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;&#x2F;h2&gt;
 &lt;ul&gt;
