@@ -56,7 +56,7 @@
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build the project to another directory because zola will delete the submodule &#x2F;public otherwise
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt; build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --output-dir&lt;&#x2F;span&gt;&lt;span&gt; public_zola
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#Now copy built files to public directory
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cp -a&lt;&#x2F;span&gt;&lt;span&gt; public_zola&#x2F;* public&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cp -a&lt;&#x2F;span&gt;&lt;span&gt; public_zola&#x2F; public&#x2F;
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rm -rf&lt;&#x2F;span&gt;&lt;span&gt; public_zola
 &lt;&#x2F;span&gt;&lt;span&gt;
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-e &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;\033[0;32mCommit change to main repository\033[0m\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
@@ -96,7 +96,7 @@ This will remove the previous version of the website locally, then commit all ch
 &lt;p&gt;If a submodule was previously added and throws an error like : &amp;quot;A git directory for &#x27;public&#x27; is found locally with remote(s)&amp;quot; you can do this&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rm -rf&lt;&#x2F;span&gt;&lt;span&gt; public
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Delete the relevant lines from the .gitmodules
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; rm&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --cached&lt;&#x2F;span&gt;&lt;span&gt; public
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; rm&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -r --cached&lt;&#x2F;span&gt;&lt;span&gt; public
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rm -rf&lt;&#x2F;span&gt;&lt;span&gt; .git&#x2F;modules&#x2F;public
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Then re add the submodule
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; submodule add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -b&lt;&#x2F;span&gt;&lt;span&gt; main git@github.com:&amp;lt;username&amp;gt;&#x2F;&amp;lt;username&amp;gt;.github.io.git public
