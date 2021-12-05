@@ -26,6 +26,7 @@
       
 
       <link href="/css/main.css" rel="stylesheet">
+      <link id="syntax_highlight" href="#" rel="stylesheet">
 
       <title>
         
@@ -64,7 +65,7 @@
         </div>
         <div class="flex-1 flex items-center">
           <div class="flex-shrink-0 flex items-center ml-2">
-            <span class="text-xl text-gray-800 dark:text-white">tchartron</span>
+            <a href="/" class="text-xl text-gray-800 dark:text-white">tchartron</a>
             <!-- <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
             <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"> -->
           </div>
@@ -398,57 +399,57 @@
 <li>Create a simple README.md file to describe your project.</li>
 <li>Add this repository which will be used to host the website as a git submodule of your Zola website.</li>
 </ol>
-<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">cd</span><span> my-zola-website
-</span><span style="color:#bf616a;">git</span><span> submodule add</span><span style="color:#bf616a;"> -b</span><span> main git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> my-zola-website</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> submodule add<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>b</span> main git@github.com:<span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>username<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>/<span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>username<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>.github.io.git public</span>
 </span></code></pre>
 <p>This added the repository we created as a submodule in the <code>public</code> folder.</p>
 <ol start="4">
 <li>Now go back to the root of the Zola website and copy this <a rel="noopener" target="_blank" href="https://github.com/tchartron/tchartron-zola/blob/main/deploy-github.sh">script</a> as <code>deploy.sh</code> and make it executable</li>
 </ol>
-<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">cd</span><span> ..
-</span><span style="color:#bf616a;">touch</span><span> deploy.sh
-</span><span>
-</span><span style="color:#65737e;">#deploy.sh content
-</span><span style="color:#65737e;">#!/usr/bin/env bash
-</span><span>
-</span><span style="color:#65737e;"># If a command fails then the deploy stops
-</span><span style="color:#96b5b4;">set </span><span style="color:#bf616a;">-e
-</span><span>
-</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-d </span><span>&quot;</span><span style="color:#a3be8c;">public</span><span>&quot; </span><span style="color:#96b5b4;">]
-</span><span style="color:#b48ead;">then
-</span><span>    </span><span style="color:#96b5b4;">echo </span><span style="color:#bf616a;">-e </span><span>&quot;</span><span style="color:#a3be8c;">\033[0;32mRemoving public folder except .git and README.md and CNAME \033[0m\n</span><span>&quot;
-</span><span>    </span><span style="color:#96b5b4;">cd</span><span> public
-</span><span>    </span><span style="color:#bf616a;">find</span><span> .</span><span style="color:#bf616a;"> -not -name </span><span>&#39;</span><span style="color:#a3be8c;">.git</span><span>&#39;</span><span style="color:#bf616a;"> -not -name </span><span>&#39;</span><span style="color:#a3be8c;">README.md</span><span>&#39;</span><span style="color:#bf616a;"> -not -name </span><span>&#39;</span><span style="color:#a3be8c;">CNAME</span><span>&#39;</span><span style="color:#bf616a;"> -delete
-</span><span>    </span><span style="color:#96b5b4;">cd</span><span> ..
-</span><span style="color:#b48ead;">fi
-</span><span>
-</span><span style="color:#96b5b4;">echo </span><span style="color:#bf616a;">-e </span><span>&quot;</span><span style="color:#a3be8c;">\033[0;32mDeploying updates to GitHub pages repository\033[0m\n</span><span>&quot;
-</span><span style="color:#65737e;"># Build the project to another directory because zola will delete the submodule /public otherwise
-</span><span style="color:#bf616a;">zola</span><span> build</span><span style="color:#bf616a;"> --output-dir</span><span> public_zola
-</span><span style="color:#65737e;">#Now copy built files to public directory
-</span><span style="color:#bf616a;">cp -a</span><span> public_zola/ public/
-</span><span style="color:#bf616a;">rm -rf</span><span> public_zola
-</span><span>
-</span><span style="color:#96b5b4;">echo </span><span style="color:#bf616a;">-e </span><span>&quot;</span><span style="color:#a3be8c;">\033[0;32mCommit change to main repository\033[0m\n</span><span>&quot;
-</span><span style="color:#bf616a;">git</span><span> add .
-</span><span style="color:#bf616a;">git</span><span> commit</span><span style="color:#bf616a;"> -am </span><span>&quot;</span><span style="color:#a3be8c;">update</span><span>&quot;
-</span><span style="color:#bf616a;">git</span><span> push origin main
-</span><span>
-</span><span style="color:#65737e;"># Go To Public folder
-</span><span style="color:#96b5b4;">cd</span><span> public
-</span><span>
-</span><span style="color:#bf616a;">git</span><span> checkout main
-</span><span style="color:#65737e;"># Add changes to git.
-</span><span style="color:#bf616a;">git</span><span> add .
-</span><span>
-</span><span style="color:#65737e;"># Commit changes.
-</span><span style="color:#bf616a;">msg</span><span>=&quot;</span><span style="color:#a3be8c;">update site content </span><span>$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">date</span><span style="color:#a3be8c;">)</span><span>&quot;
-</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-n </span><span>&quot;$</span><span style="color:#bf616a;">*</span><span>&quot; </span><span style="color:#96b5b4;">]</span><span>; </span><span style="color:#b48ead;">then
-</span><span>    </span><span style="color:#bf616a;">msg</span><span>=&quot;$</span><span style="color:#bf616a;">*</span><span>&quot;
-</span><span style="color:#b48ead;">fi
-</span><span style="color:#bf616a;">git</span><span> commit</span><span style="color:#bf616a;"> -m </span><span>&quot;$</span><span style="color:#bf616a;">msg</span><span>&quot;
-</span><span style="color:#65737e;"># Push source
-</span><span style="color:#bf616a;">git</span><span> push origin main
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> ..</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">touch</span></span><span class="z-meta z-function-call z-arguments z-shell"> deploy.sh</span>
+
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell">deploy.sh content</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell">!/usr/bin/env bash</span><span class="z-comment z-line z-number-sign z-shell">
+</span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> If a command fails then the deploy stops</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-set z-shell">set</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>e</span></span>
+
+<span class="z-keyword z-control z-conditional z-if z-shell">if</span> <span class="z-support z-function z-test z-begin z-shell">[</span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>d</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>public<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span> <span class="z-support z-function z-test z-end z-shell">]</span></span>
+<span class="z-keyword z-control z-conditional z-then z-shell">then</span>
+    <span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>e</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>\033[0;32mRemoving public folder except .git and README.md and CNAME \033[0m\n<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+    <span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> public</span>
+    <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">find</span></span><span class="z-meta z-function-call z-arguments z-shell"> .<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>not</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>name</span> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>.git<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>not</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>name</span> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>README.md<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>not</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>name</span> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>CNAME<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>delete</span></span>
+    <span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> ..</span>
+<span class="z-keyword z-control z-conditional z-end z-shell">fi</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>e</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>\033[0;32mDeploying updates to GitHub pages repository\033[0m\n<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Build the project to another directory because zola will delete the submodule /public otherwise</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">zola</span></span><span class="z-meta z-function-call z-arguments z-shell"> build<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>output-dir</span> public_zola</span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell">Now copy built files to public directory</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cp</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>a</span> public_zola/ public/</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">rm</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>rf</span> public_zola</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>e</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>\033[0;32mCommit change to main repository\033[0m\n<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add .</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>am</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>update<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> push origin main</span>
+
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Go To Public folder</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> public</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> checkout main</span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Add changes to git.</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> add .</span>
+
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Commit changes.</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-variable z-other z-readwrite z-assignment z-shell">msg</span><span class="z-keyword z-operator z-assignment z-shell">=</span><span class="z-string z-unquoted z-shell"><span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>update site content <span class="z-meta z-group z-expansion z-command z-parens z-shell"><span class="z-punctuation z-definition z-variable z-shell">$</span><span class="z-punctuation z-section z-parens z-begin z-shell">(</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">date</span></span><span class="z-punctuation z-section z-parens z-end z-shell">)</span></span><span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-keyword z-control z-conditional z-if z-shell">if</span> <span class="z-support z-function z-test z-begin z-shell">[</span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell">-</span>n</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span><span class="z-meta z-group z-expansion z-parameter z-shell"><span class="z-punctuation z-definition z-variable z-shell">$</span><span class="z-variable z-language z-shell">*</span></span><span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span> <span class="z-support z-function z-test z-end z-shell">]</span></span><span class="z-keyword z-operator z-logical z-continue z-shell">;</span> <span class="z-keyword z-control z-conditional z-then z-shell">then</span>
+    <span class="z-variable z-other z-readwrite z-assignment z-shell">msg</span><span class="z-keyword z-operator z-assignment z-shell">=</span><span class="z-string z-unquoted z-shell"><span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span><span class="z-meta z-group z-expansion z-parameter z-shell"><span class="z-punctuation z-definition z-variable z-shell">$</span><span class="z-variable z-language z-shell">*</span></span><span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-keyword z-control z-conditional z-end z-shell">fi</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> commit<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span><span class="z-meta z-group z-expansion z-parameter z-shell"><span class="z-punctuation z-definition z-variable z-shell">$</span><span class="z-variable z-other z-readwrite z-shell">msg</span></span><span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Push source</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> push origin main</span>
 </span></code></pre>
 <ol start="5">
 <li>Now deploy your website to https://<username>.github.io with this simple command : <code>./deploy.sh &quot;update site content&quot;</code>.
@@ -464,12 +465,12 @@ This will remove the previous version of the website locally, then commit all ch
 </ol>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>If a submodule was previously added and throws an error like : &quot;A git directory for 'public' is found locally with remote(s)&quot; you can do this</p>
-<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">rm -rf</span><span> public
-</span><span style="color:#65737e;"># Delete the relevant lines from the .gitmodules
-</span><span style="color:#bf616a;">git</span><span> rm</span><span style="color:#bf616a;"> -r --cached</span><span> public
-</span><span style="color:#bf616a;">rm -rf</span><span> .git/modules/public
-</span><span style="color:#65737e;"># Then re add the submodule
-</span><span style="color:#bf616a;">git</span><span> submodule add</span><span style="color:#bf616a;"> -b</span><span> main git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git public
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">rm</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>rf</span> public</span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Delete the relevant lines from the .gitmodules</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> rm<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>r</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>cached</span> public</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">rm</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>rf</span> .git/modules/public</span>
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> Then re add the submodule</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> submodule add<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>b</span> main git@github.com:<span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>username<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>/<span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>username<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>.github.io.git public</span>
 </span></code></pre>
 
     </div>
@@ -567,7 +568,7 @@ This will remove the previous version of the website locally, then commit all ch
     <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
       <div class="sm:w-2/3 text-center py-6">
         <p class="text-sm text-black dark:text-white font-bold mb-2">
-          © 2021 zola-tailwind theme made with tailwindcss for <a href="https://www.getzola.org/" target="_blank">Zola</a>
+          © 2021 blow theme made with <a href="https://tailwindcss.com/" target="_blank">tailwindcss</a> for <a href="https://www.getzola.org/" target="_blank">Zola</a>
         </p>
       </div>
     </div>

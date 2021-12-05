@@ -26,6 +26,7 @@
       
 
       <link href="/css/main.css" rel="stylesheet">
+      <link id="syntax_highlight" href="#" rel="stylesheet">
 
       <title>
         
@@ -64,7 +65,7 @@
         </div>
         <div class="flex-1 flex items-center">
           <div class="flex-shrink-0 flex items-center ml-2">
-            <span class="text-xl text-gray-800 dark:text-white">tchartron</span>
+            <a href="/" class="text-xl text-gray-800 dark:text-white">tchartron</a>
             <!-- <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
             <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"> -->
           </div>
@@ -399,79 +400,79 @@
       <h2 id="create-a-docker-swarm-cluster-using-a-docker-compose-file-and-traefik-reverse-proxy">Create a docker swarm cluster using a docker-compose file and traefik reverse proxy</h2>
 <hr />
 <p>Example git repository for compose project used : </p>
-<pre data-lang="shell" style="background-color:#2b303b;color:#c0c5ce;" class="language-shell "><code class="language-shell" data-lang="shell"><span># install docker on all machines (i use a single node for now)
-</span><span># using debian
-</span><span>sudo apt-get remove docker docker-engine docker.io containerd runc
-</span><span>sudo apt-get update
-</span><span>sudo apt-get install \
-</span><span>    apt-transport-https \
-</span><span>    ca-certificates \
-</span><span>    curl \
-</span><span>    gnupg \
-</span><span>    lsb-release
-</span><span>    
-</span><span>curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-</span><span>
-</span><span>echo \
-</span><span>  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-</span><span>  $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
-</span><span>  
-</span><span>sudo apt-get update
-</span><span>sudo apt-get install docker-ce docker-ce-cli containerd.io
-</span><span>
-</span><span># Add non root user to docker group to allow him to run docker
-</span><span>sudo groupadd docker
-</span><span>sudo usermod -aG docker $USER
-</span><span># Start on boot 
-</span><span>sudo systemctl enable docker.service
-</span><span>sudo systemctl enable containerd.service
-</span><span>
-</span><span># Use an image registry
-</span><span># Create gitlab access token with write_registry and read_registry
-</span><span># Login to registry
-</span><span>docker login registry.gitlab.com -u tchartron -p my_gitlab_access_token
-</span><span># Build images
-</span><span>docker compose -f docker-compose.swarm.yml build [--no-cache]
-</span><span># Push images
-</span><span>docker push registry.gitlab.com/monprojet/web/projet-php:0.1
-</span><span>docker push registry.gitlab.com/monprojet/web/projet-mysql:0.1
-</span><span>docker push registry.gitlab.com/monprojet/web/projet-nginx:0.1
-</span><span>docker push registry.gitlab.com/monprojet/web/projet-mercure:0.1
-</span><span>
-</span><span># Initialize the swarm on the manager node
-</span><span>docker swarm init
-</span><span># Add workers eventually
-</span><span># Create overlay network
-</span><span>docker network create -d overlay projet_overlay
-</span><span># Get nodes
-</span><span>docker node ls
-</span><span># Add label to match defined placement constraint (from docker-compose file) for mysql container as it is pinned to a specific host
-</span><span>docker node update --label-add hostname=manager_1 vmroytpjhydkmnrl4nj4levtg
-</span><span># Deploy the stack
-</span><span>docker stack deploy --with-registry-auth --compose-file docker-compose.swarm.yml projet
-</span><span># Deploy the stack with preprocessing to interpolate env vars !
-</span><span>(echo -e &quot;version: &#39;3.8&#39;\n&quot;;  docker compose -f docker-compose.swarm.yml config) | docker stack deploy --with-registry-auth --compose-file - projet
-</span><span># Prod deploy
-</span><span>docker stack deploy --with-registry-auth --compose-file docker-compose.swarm.prod.yml projet
-</span><span>
-</span><span>#Test to see if it&#39;s loadbalanced and other behaviors
-</span><span>#Test scaling php
+<pre data-lang="shell" class="language-shell z-code"><code class="language-shell" data-lang="shell"><span class="z-text z-plain"># install docker on all machines (i use a single node for now)
+# using debian
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+  
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+# Add non root user to docker group to allow him to run docker
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# Start on boot 
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+
+# Use an image registry
+# Create gitlab access token with write_registry and read_registry
+# Login to registry
+docker login registry.gitlab.com -u tchartron -p my_gitlab_access_token
+# Build images
+docker compose -f docker-compose.swarm.yml build [--no-cache]
+# Push images
+docker push registry.gitlab.com/monprojet/web/projet-php:0.1
+docker push registry.gitlab.com/monprojet/web/projet-mysql:0.1
+docker push registry.gitlab.com/monprojet/web/projet-nginx:0.1
+docker push registry.gitlab.com/monprojet/web/projet-mercure:0.1
+
+# Initialize the swarm on the manager node
+docker swarm init
+# Add workers eventually
+# Create overlay network
+docker network create -d overlay projet_overlay
+# Get nodes
+docker node ls
+# Add label to match defined placement constraint (from docker-compose file) for mysql container as it is pinned to a specific host
+docker node update --label-add hostname=manager_1 vmroytpjhydkmnrl4nj4levtg
+# Deploy the stack
+docker stack deploy --with-registry-auth --compose-file docker-compose.swarm.yml projet
+# Deploy the stack with preprocessing to interpolate env vars !
+(echo -e &quot;version: &#39;3.8&#39;\n&quot;;  docker compose -f docker-compose.swarm.yml config) | docker stack deploy --with-registry-auth --compose-file - projet
+# Prod deploy
+docker stack deploy --with-registry-auth --compose-file docker-compose.swarm.prod.yml projet
+
+#Test to see if it&#39;s loadbalanced and other behaviors
+#Test scaling php
 </span></code></pre>
 <h2 id="troubleshooting-and-useful-commands">Troubleshooting and useful commands</h2>
-<pre data-lang="shell" style="background-color:#2b303b;color:#c0c5ce;" class="language-shell "><code class="language-shell" data-lang="shell"><span>#Find why container does not start
-</span><span>docker service ps --no-trunc projet_mysql
-</span><span>#OR if on linux (above command does not show every errors)
-</span><span>journalctl -u docker.service | tail -n 50 
-</span><span>
-</span><span>#Logs of running service
-</span><span>docker service logs projet_traefik -f
-</span><span>
-</span><span>#Leave the swarm and destroy it&#39;s services and containers
-</span><span>docker swarm leave --force
-</span><span>
-</span><span>#This explains how to communicate to service with hostname 
-</span><span>https://stackoverflow.com/questions/55039198/docker-swarm-how-to-communicate-to-other-services-through-their-hostname-only
-</span><span>``
+<pre data-lang="shell" class="language-shell z-code"><code class="language-shell" data-lang="shell"><span class="z-text z-plain">#Find why container does not start
+docker service ps --no-trunc projet_mysql
+#OR if on linux (above command does not show every errors)
+journalctl -u docker.service | tail -n 50 
+
+#Logs of running service
+docker service logs projet_traefik -f
+
+#Leave the swarm and destroy it&#39;s services and containers
+docker swarm leave --force
+
+#This explains how to communicate to service with hostname 
+https://stackoverflow.com/questions/55039198/docker-swarm-how-to-communicate-to-other-services-through-their-hostname-only
+``
 </span></code></pre>
 
     </div>
@@ -527,7 +528,7 @@
     <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
       <div class="sm:w-2/3 text-center py-6">
         <p class="text-sm text-black dark:text-white font-bold mb-2">
-          © 2021 zola-tailwind theme made with tailwindcss for <a href="https://www.getzola.org/" target="_blank">Zola</a>
+          © 2021 blow theme made with <a href="https://tailwindcss.com/" target="_blank">tailwindcss</a> for <a href="https://www.getzola.org/" target="_blank">Zola</a>
         </p>
       </div>
     </div>
